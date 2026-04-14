@@ -216,6 +216,7 @@ export default class ProductsController {
         'price',
         'stock_quantity',
         'target_problems',
+        'active_ingredient',
         'description',
         'created_at',
         'updated_at',
