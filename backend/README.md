@@ -1162,3 +1162,5 @@ This endpoint is idempotent. If the dealer is already verified, it will return s
   "error": "AgroDealer not found."
 }
 ```
+
+# todo: Update docs with order creation, payment callback and redirect, crop scans, treatments search

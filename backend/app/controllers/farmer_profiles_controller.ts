@@ -9,6 +9,7 @@ import { rules } from '#services/validator_rules'
 import router from '@adonisjs/core/services/router'
 import CropScan from '#models/crop_scan'
 import { ProductCategory } from '#models/product'
+import { ModelObject } from '@adonisjs/lucid/types/model'
 
 export default class FarmerProfilesController {
   /**
@@ -234,7 +235,18 @@ export default class FarmerProfilesController {
           disease: aiResult.disease,
           instructions: aiResult.instructions,
         },
-        treatments: result?.rows ?? [],
+        treatments:
+          result?.rows && result.rows.length
+            ? result.rows.map((row: ModelObject /** todo: provide type */) => ({
+                ...row,
+                links: {
+                  create_order: {
+                    method: 'POST',
+                    href: router.makeUrl('api.v1.products.orders.store', [row.id]),
+                  },
+                },
+              }))
+            : [],
       },
     })
   }
